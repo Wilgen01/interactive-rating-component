@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <main id='rate' class="card">
+    <div class="card__starContainer">
+      <img src="images/icon-star.svg" alt="">
+    </div>
+    <h2 class="card__title">How did we do?</h2>
+    <p class="card__paragraph">Please let us know how we did with your support request. All feedback is appreciated 
+      to help us improve our offering!</p>
+      <ul class="card__numbersList">
+        <li class="card__number">1</li>
+        <li class="card__number">2</li>
+        <li class="card__number">3</li>
+        <li class="card__number">4</li>
+        <li class="card__number">5</li>
+      </ul>
+      <button class="card__button" id="btnSub">SUBMIT</button>
+  </main>
+
+  <section id="tank" class="card card__tank hidden">
+    <div class="card__tankImg">
+      <img src="images/illustration-thank-you.svg" alt="">
+    </div>
+    <p class="card__selectedScore" id="score">
+      
+    </p>
+    <h2 class="card__tankTitle">
+      Thank you!
+    </h2>
+    <p class="card__tankParagraph">
+      We appreciate you taking the time to give a rating. If you ever need more support, 
+      don’t hesitate to get in touch!
+    </p>
+  </section>
+
+
+
+
+  <script>
+    const selection = document.getElementsByClassName('card__number')
+    const rate = document.getElementById('rate')
+    const tank = document.getElementById('tank')
+    const btnSub = document.getElementById('btnSub')
+    const score = document.getElementById('score')
+
+    let scoreValue =  0
+
+    for (let i = 0; i < selection.length; i++) {
+         selection[i].addEventListener('click', () =>{
+          let current = document.getElementsByClassName('active')
+          scoreValue = i+1
+          console.log(scoreValue);
+          if(current.length > 0){
+            current[0].classList.remove('active')
+          }
+          selection[i].classList.toggle('active')
+         })   
+    }
+
+    btnSub.addEventListener('click', () =>{
+      if(scoreValue < 1){
+        return
+      }
+      rate.classList.add('hidden')
+      tank.classList.remove('hidden')
+      score.innerText = `You selected ${scoreValue} out of 5`
+    })
+
+
+
+  </script>
+
+  <div class="attribution" style="display: none;">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+</body>
+</html>
